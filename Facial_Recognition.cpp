@@ -11,7 +11,7 @@ using namespace cv;
 void face_Detect(Mat img, CascadeClassifier faceCascade) //function for face detection in image
 {
 	faceCascade.load("haarcascade_frontalface_default.xml"); //loading xml file for detecting frontal faces
-	if (faceCascade.empty())	// if file detected as empty
+	if (faceCascade.empty()) // if file detected as empty
 	{
 		cout << "XML file not loaded" << endl;
 	}
@@ -22,20 +22,20 @@ void face_Detect(Mat img, CascadeClassifier faceCascade) //function for face det
 	for (int i = 0; i < faces.size(); ++i)
 	{
 		rectangle(img, faces[i].tl(), faces[i].br(), Scalar(255, 0, 255), 3); //making rectangles on detected faces
-		face_count += 1;	//incrementing face_count by 1 each time a face is found
+		face_count += 1; //incrementing face_count by 1 each time a face is found
 	}
 	string temp = to_string(face_count); //storing count of faces as string in temporary variable
 
 	putText(img, "No of faces:  " + temp, Point(25, 30), FONT_HERSHEY_COMPLEX_SMALL, 1, LINE_AA); //printing text at top right corner showing number of faces
-	imshow("Picture_Detection", img);	//detecting faces in a new window named	'Picture_Detection'
+	imshow("Picture_Detection", img); //detecting faces in a new window named	'Picture_Detection'
 	waitKey(0);	//displaying Picture_Detection window infinitely until any keypress
 }
 
 void motion_detect(Mat img1, CascadeClassifier motionCascade) //function for face detection in video
 {
-	VideoCapture cap(0);	//function for capturing video
+	VideoCapture cap(0); //function for capturing video
 	motionCascade.load("haarcascade_frontalface_default.xml"); //loading xml file for motion detection in video
-	if (motionCascade.empty())	//if file found empty
+	if (motionCascade.empty()) //if file found empty
 	{
 		cout << "XML file not loaded" << endl;
 	}
@@ -45,11 +45,11 @@ void motion_detect(Mat img1, CascadeClassifier motionCascade) //function for fac
 	{
 		cap.read(img1);	//reading frame of detected video
 		motionCascade.detectMultiScale(img1, faces1, 1.1, 8); //detecting objects of different sizes
-		int face_count2 = 0;	//face count in video initialized as 0
+		int face_count2 = 0; //face count in video initialized as 0
 		for (int i = 0; i < faces1.size(); ++i)
 		{
 			rectangle(img1, faces1[i].tl(), faces1[i].br(), Scalar(0, 255, 0), 3); //making rectangles on faces
-			face_count2 += 1;	//incrementing face count by 1
+			face_count2 += 1; //incrementing face count by 1
 		}
 		string temp1 = to_string(face_count2);	//coverting face_count2 to string
 		putText(img1, "No of faces:  " + temp1, Point(30, 45), FONT_HERSHEY_COMPLEX_SMALL, 1, LINE_AA); //printing text at top left corner with face count
